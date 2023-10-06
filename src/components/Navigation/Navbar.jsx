@@ -13,8 +13,8 @@ const Navbar = () => {
       href: '/dashboard',
     },
     {
-      name: 'Market',
-      href: '/market',
+      name: 'Transactions',
+      href: '/transactions',
     },
     {
       name: 'Portfolio',
