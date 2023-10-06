@@ -9,7 +9,7 @@ export default function AddExpenseModal({
   defaultBudgetId,
 }) {
   const [budgets, setBudgets] = useState([]);
-  
+ 
   useEffect(() => {
     // Fetch budgets data from the Spring Boot backend.
     fetch("http://localhost:8082/api/budget/all")
@@ -27,6 +27,7 @@ export default function AddExpenseModal({
   const budgetIdRef = useRef()
   const { addExpense } = useBudgets()
 
+
   async function handleSubmit(e) {
     e.preventDefault();
 //console.log("sd",budgetIdRef.current.value);
@@ -36,8 +37,10 @@ export default function AddExpenseModal({
       budgetId: budgetIdRef.current.value,
     };
 
+
     try {
       const response = await axios.post('http://localhost:8082/api/expense/create', expenseData);
+
 
       if (response.status === 200) {
         // Expense created successfully, you can handle the success here
@@ -51,6 +54,7 @@ export default function AddExpenseModal({
       // Handle network errors or other issues
       console.error('Error:', error);
     }
+
 
     handleClose();
   }
@@ -96,3 +100,5 @@ export default function AddExpenseModal({
     </Modal>
   )
 }
+
+

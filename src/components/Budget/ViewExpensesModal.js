@@ -3,10 +3,12 @@ import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../../contexts/BudgetsConte
 import { currencyFormatter } from "./utils"
 import { useEffect, useState } from "react"
 
+
 export default function ViewExpensesModal({ budgetId, handleClose }) {
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } = useBudgets();
   const [expenses, setExpenses] = useState([]);
   const [budget, setBudget] = useState(null);
+
 
   useEffect(() => {
     if (budgetId !== null) {
@@ -14,8 +16,8 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
       // Fetch expenses data for the specified budget or "Uncategorized" budget.
       const apiUrl = `http://localhost:8082/api/expense/all`;
       setExpenses([]);
-      
-      
+     
+     
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
@@ -27,8 +29,8 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
             expense.amount = Number(expense.amount)
             console.log("sd",expense.amount);
           });
-          
-          
+         
+         
           if (Array.isArray(data.expenses)) {
             setExpenses(data.expenses);
           } else {
@@ -42,13 +44,15 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
         });
     }
   }, [budgetId]);
-  
+ 
+
 
   const handleDeleteBudget = (budget) => {
     console.log("deleteBudget",budget);
     // if (budget) {
     //   // Send a DELETE request to delete the budget.
     //   const apiUrl = `http://localhost:8082/api/budget/delete/${budget.budgetId}`;
+
 
     //   fetch(apiUrl, {
     //     method: 'DELETE',
@@ -67,9 +71,11 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
     // }
   };
 
+
   const handleDeleteExpense = (expense) => {
     // Send a DELETE request to delete the expense.
     const apiUrl = `http://localhost:8082/api/expense/delete/${budgetId}`;
+
 
     fetch(apiUrl, {
       method: 'DELETE',
@@ -86,6 +92,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
       });
   };
 
+
   return (
     <Modal show={budgetId != null} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -96,7 +103,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
               <Button
                 onClick={() => {
                   handleDeleteBudget(budget)
-                  
+                 
                   handleClose()
                 }}
                 variant="outline-danger"

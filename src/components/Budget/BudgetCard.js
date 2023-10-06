@@ -1,6 +1,7 @@
 import { Button, Card, ProgressBar, Stack } from "react-bootstrap"
 import { currencyFormatter } from "./utils"
 
+
 export default function BudgetCard({
   key,
   name,
@@ -24,6 +25,7 @@ export default function BudgetCard({
     //   // Send a DELETE request to delete the budget.
     //   const apiUrl = `http://localhost:8082/api/budget/delete/${budget.budgetId}`;
 
+
     //   fetch(apiUrl, {
     //     method: 'DELETE',
     //   })
@@ -40,7 +42,9 @@ export default function BudgetCard({
     //     });
     // }
 
+
   };
+
 
   return (
     <Card className={classNames.join(" ")}>
@@ -58,7 +62,7 @@ export default function BudgetCard({
           <Button
                 onClick={() => {
                   handleDeleteBudget(key)
-                  
+                 
                 }}
                 variant="outline-danger"
               >
@@ -92,6 +96,7 @@ export default function BudgetCard({
     </Card>
   )
 }
+
 
 function getProgressBarVariant(amount, max) {
   const ratio = amount / max

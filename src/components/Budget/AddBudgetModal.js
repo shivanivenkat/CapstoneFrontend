@@ -1,20 +1,24 @@
 import { Form, Modal, Button } from "react-bootstrap"
 import { useRef } from "react"
 import { useBudgets } from "../../contexts/BudgetsContext"
-import axios from 'axios'; 
+import axios from 'axios';
+
 
 export default function AddBudgetModal({ show, handleClose }) {
   const nameRef = useRef();
   const maxRef = useRef();
   const { addBudget } = useBudgets();
 
+
   async function handleSubmit(e) {
     e.preventDefault();
+
 
     const budgetData = {
       name: nameRef.current.value,
       maximumExpense: parseFloat(maxRef.current.value),
     };
+
 
     try {
       // Send a POST request to your Spring Boot backend
@@ -33,8 +37,10 @@ console.log(response);
       console.error('Error:', error);
     }
 
+
     handleClose();
   }
+
 
   return (
     <Modal show={show} onHide={handleClose}>

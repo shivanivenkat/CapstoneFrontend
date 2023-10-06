@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 function TransactionHistory() {
   const [transactions, setTransactions] = useState([]);
+
 
   useEffect(() => {
     // Fetch transactions from your API
@@ -23,8 +25,10 @@ function TransactionHistory() {
       console.error('Error fetching transactions:', error);
     });
 
+
   }, []);
   console.log(transactions);
+
 
   return (
     <div>
@@ -56,5 +60,6 @@ function TransactionHistory() {
     </div>
   );
 }
+
 
 export default TransactionHistory;

@@ -7,7 +7,7 @@ import BudgetCard from "./components/Budget/BudgetCard";
 import UncategorizedBudgetCard from "./components/Budget/UncategorizedBudgetCard";
 import TotalBudgetCard from "./components/Budget/TotalBudgetCard";
 import { useState, useEffect } from "react";
-import TransactionHistory from "./components/Transactions/transactionHistory";
+import TransactionHistory from "./components/Transactions/transactionHistory.js";
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
@@ -15,7 +15,7 @@ function App() {
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const [budgets, setBudgets] = useState([]);
   const [expenses, setExpenses] = useState([]);
-  
+ 
   useEffect(() => {
     // Fetch budgets data from the Spring Boot backend.
     fetch("http://localhost:8082/api/budget/all")
@@ -38,10 +38,12 @@ function App() {
       });
   }, []);
 
+
   function openAddExpenseModal(budgetId) {
     setShowAddExpenseModal(true);
     setAddExpenseModalBudgetId(budgetId);
   }
+
 
   return (
     <>
@@ -72,6 +74,7 @@ function App() {
                 amount += expense.amount;
               }
             } )// Calculate the amount here.
+
 
             return (
               <BudgetCard
@@ -113,4 +116,7 @@ function App() {
   );
 }
 
+
 export default App;
+
+
