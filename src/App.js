@@ -7,7 +7,9 @@ import BudgetCard from "./components/Budget/BudgetCard";
 import UncategorizedBudgetCard from "./components/Budget/UncategorizedBudgetCard";
 import TotalBudgetCard from "./components/Budget/TotalBudgetCard";
 import { useState, useEffect } from "react";
-import TransactionHistory from "./components/Transactions/transactionHistory.js";
+import TransactionHistory from "./components/Transactions/transactionHistory";
+import RegisterForm from "./components/RegisterForm/RegisterForm";
+
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
@@ -46,7 +48,7 @@ function App() {
 
 
   return (
-    <>
+    <><>
       <Container className="my-4">
         <Stack direction="horizontal" gap="2" className="mb-4">
           <h1 className="me-auto">Budgets</h1>
@@ -73,7 +75,7 @@ function App() {
               if (expense.budgetId === budget.id) {
                 amount += expense.amount;
               }
-            } )// Calculate the amount here.
+            }); // Calculate the amount here.
 
 
             return (
@@ -83,40 +85,32 @@ function App() {
                 amount={amount}
                 max={budget.maximumExpense}
                 onAddExpenseClick={() => openAddExpenseModal(budget.id)}
-                onViewExpensesClick={() =>
-                  setViewExpensesModalBudgetId(budget.id)
-                }
-              />
+                onViewExpensesClick={() => setViewExpensesModalBudgetId(budget.id)} />
             );
           })}
           {/* <UncategorizedBudgetCard */}
-            {/* //onAddExpenseClick={openAddExpenseModal}
-            //onViewExpensesClick={() => */}
-              {/* //setViewExpensesModalBudgetId(UNCATEGORIZED_BUDGET_ID) */}
-            {/* //}
-          /> */}
+          {/* //onAddExpenseClick={openAddExpenseModal}
+    //onViewExpensesClick={() => */}
+          {/* //setViewExpensesModalBudgetId(UNCATEGORIZED_BUDGET_ID) */}
+          {/* //}
+  /> */}
           <TotalBudgetCard />
         </div>
       </Container>
       <AddBudgetModal
         show={showAddBudgetModal}
-        handleClose={() => setShowAddBudgetModal(false)}
-      />
+        handleClose={() => setShowAddBudgetModal(false)} />
       <AddExpenseModal
         show={showAddExpenseModal}
         defaultBudgetId={addExpenseModalBudgetId}
-        handleClose={() => setShowAddExpenseModal(false)}
-      />
+        handleClose={() => setShowAddExpenseModal(false)} />
       <ViewExpensesModal
         budgetId={viewExpensesModalBudgetId}
-        handleClose={() => setViewExpensesModalBudgetId()}
-      />
+        handleClose={() => setViewExpensesModalBudgetId()} />
       <TransactionHistory />
-    </>
+    </><RegisterForm></RegisterForm></>
   );
 }
 
 
 export default App;
-
-

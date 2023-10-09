@@ -1,65 +1,85 @@
-// src/components/TransactionHistory.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import './TransactionHistory.css';
 
 
 function TransactionHistory() {
   const [transactions, setTransactions] = useState([]);
-
+  const [transactionType, setTransactionType] = useState('expense');
+  const [transactionAmount, setTransactionAmount] = useState('');
 
   useEffect(() => {
-    // Fetch transactions from your API
     console.log("Fetching transactions...");
     fetch('http://localhost:8081/api/transactions/all')
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
-      setTransactions(data);
+        setTransactions(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching transactions:', error);
+      });
+  }, [transactions]);
+
+  const handleAddTransaction = () => {
+    const newTransaction = {
+      amount: parseFloat(transactionAmount),
+      transactionType: transactionType,
+    };
+
+    fetch('http://localhost:8081/api/transactions/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTransaction),
     })
-    .catch((error) => {
-      console.error('Error fetching transactions:', error);
-    });
-
-
-  }, []);
-  console.log(transactions);
-
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Transaction added:', data);
+        // Update the transactions state with the newly added transaction
+        setTransactions([...transactions, data]);
+        // Clear the input fields
+        setTransactionAmount('');
+      })
+      .catch((error) => {
+        console.error('Error adding transaction:', error);
+      });
+  };
 
   return (
-    <div>
+    <div className="transaction-history">
       <h2>Transaction History</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Amount</th>
-            <th>User ID</th>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map((transaction) => (
-            <tr key={transaction.transactionID}>
-              <td>{transaction.transactionID}</td>
-              <td>{transaction.amount}</td>
-              <td>{transaction.userID}</td>
-              <td>{transaction.transactionDate}</td>
-              <td>{transaction.transactionType}</td>
-              <td>{transaction.expenseCategory}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="transaction-input">
+        <input
+          type="text"
+          placeholder="Amount"
+          value={transactionAmount}
+          onChange={(e) => setTransactionAmount(e.target.value)}
+        />
+        <select value={transactionType} onChange={(e) => setTransactionType(e.target.value)}>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+        <button onClick={handleAddTransaction}>Add Transaction</button>
+      </div>
+      <div className="transaction-list">
+        {transactions.map((transaction) => (
+          <div key={transaction.transactionID} className="transaction-card">
+            <div className="transaction-info">
+              <span className={`transaction-amount ${transaction.transactionType === 'income' ? 'income' : 'expense'}`}>
+                {transaction.transactionType === 'income' ? '+' : '-'} ₹{Math.abs(transaction.amount)}
+              </span>
+              <span className="transaction-type">{transaction.transactionType}</span>
+            </div>
+            <div className="transaction-details">
+              <span className="transaction-date">{transaction.transactionDate}</span>
+              {transaction.expenseCategory && <span className="transaction-category">{transaction.expenseCategory}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
 
 export default TransactionHistory;

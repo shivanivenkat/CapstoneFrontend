@@ -1,0 +1,109 @@
+/* TransactionHistory.css */
+
+/* Style the container */
+.transaction-history {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the heading */
+  .transaction-history h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  /* Style the transaction input */
+  .transaction-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .transaction-input input[type="text"] {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .transaction-input select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .transaction-input button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Style the transaction cards */
+  .transaction-card {
+    background-color: #f5f5f5;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Style the transaction amount */
+  .transaction-amount {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  /* Style income transactions */
+  .transaction-amount.income {
+    color: #4caf50;
+  }
+  
+  /* Style expense transactions */
+  .transaction-amount.expense {
+    color: #f44336;
+  }
+  
+  /* Style the transaction type */
+  .transaction-type {
+    font-size: 16px;
+    color: #777;
+    margin-left: 10px;
+  }
+  
+  /* Style the transaction details (date and category) */
+  .transaction-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  /* Style the transaction date */
+  .transaction-date {
+    font-size: 14px;
+    color: #999;
+  }
+  
+  /* Style the transaction time */
+  .transaction-time {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  /* Style the transaction category */
+  .transaction-category {
+    font-size: 14px;
+    color: #999;
+  }
+  

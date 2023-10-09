@@ -38,7 +38,7 @@ export default function TotalBudgetCard() {
       .catch((error) => {
         console.error('Error fetching expenses data:', error);
       });
-  }, []);
+  }, [totalBudgetData]);
 
 
   const { amount, max } = totalBudgetData;
